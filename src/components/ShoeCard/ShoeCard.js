@@ -33,7 +33,7 @@ const ShoeCard = ({
 
   return (
     <Link href={`/shoe/${slug}`}>
-      <Wrapper>
+      <Wrapper className={variant}>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
@@ -57,7 +57,29 @@ const Link = styled.a`
 `;
 
 const Wrapper = styled.article`
-min-width: 280px;
+  min-width: 280px;
+  position: relative;
+  
+  &.new-release,
+  &.on-sale {
+    &::after {
+      content: "Just Released!";
+      display: inline-block;
+      color: ${COLORS.white};
+      padding: 8px 9px;
+      background-color: ${COLORS.secondary};
+      border-radius: 2px;
+      position: absolute;
+      right: -4px;
+      top: 12px;
+      font-weight: bold;
+    }
+  }
+  
+  &.on-sale::after {
+    content: "Sale";
+    background-color: ${COLORS.primary};
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -65,7 +87,8 @@ const ImageWrapper = styled.div`
 `;
 
 const Image = styled.img`
-	width: 100%;
+  width: 100%;
+  border-radius: 16px 16px 4px 4px;
 `;
 
 const Row = styled.div`
